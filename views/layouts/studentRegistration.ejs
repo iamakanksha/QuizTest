@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REGISTRATION FORM</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/cssFiles/studentRegistration.css">
+</head>
+<body>
+
+    <form class="studentform" method="POST" action="/studentRegistration">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Student Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="uname" autocomplete="off" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="emailid" autocomplete="off" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Date of Birth</label>
+            <input type="date" class="form-control" id="exampleFormControlInput1" name="dob" autocomplete="off" placeholder="Enter your date of birth">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Phone number</label>
+            <input type="tel" class="form-control" id="exampleFormControlInput1" name="phoneno" autocomplete="off" placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1" >Select degree</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="degree">
+              <option value="B.E"> B.E</option>
+              <option value="B.Tech">B.Tech</option>
+              <option value="BCA"> BCA</option>
+              <option value="MCA">MCA</option>
+              
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select college</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="cid">
+              <%list.forEach(function(college){%>
+                <!--<option><%=college%></option> 
+                cid  is an integer value hence no quotes for value, check again-->
+                <option value=<%=college[0]%>><%=college[1]%></option>
+              <%})%>   
+        </select>
+
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleInputPassword1" >Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="upassword" autocomplete="off" placeholder="Password">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1" required>I will not indulge in malpractise </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    
+</body>
+</html>

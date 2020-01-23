@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var _tid=null
+            function ajaxCallToServer() {
+                    // console.log(JSON.stringify(i.cid));
+                    var xmlhttp = new XMLHttpRequest(); 
+                    var url = "/getFetchPopulate"
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.setRequestHeader("Content-type", "application/json");
+                    xmlhttp.onload=(res)=>{
+                        var a_tid=JSON.parse(res['target']['response']);
+                        _tid =a_tid.tid
+                        console.log(a_tid);
+                    }
+                    xmlhttp.send();
+                    
+                }
+            document.addEventListener("DOMContentLoaded", ajaxCallToServer());
+            
+            
+        </script>
+    
+    </head>
+    <body>
+        <h1>Redirecting in 6 seconds...</h1>
+        <button><a href="/takingTest/<%=ejsContent.uid%>/<%=ejsContent.tid%>">
+            click me
+        
+        </a></button>
+        <%=JSON.stringify(ejsContent)%>
+    </body>
+</html>

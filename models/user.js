@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     uname: DataTypes.STRING,
     phoneno: DataTypes.BIGINT,
-    emailid: DataTypes.STRING,
+    emailid: {
+      type:DataTypes.STRING,
+      //allowNull: false,
+      unique:true
+    },
     degree: DataTypes.STRING,
     dob: DataTypes.DATEONLY,
     cid: {

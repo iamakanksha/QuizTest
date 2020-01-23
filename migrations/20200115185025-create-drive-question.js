@@ -22,6 +22,14 @@ module.exports = {
           key: 'qid',
         }
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
       
     });
   },

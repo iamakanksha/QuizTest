@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     easy: DataTypes.INTEGER,
     medium: DataTypes.INTEGER,
     hard: DataTypes.INTEGER,
-    test_date: DataTypes.DATE
+    test_date: DataTypes.DATE,
+    is_active: DataTypes.STRING
+
   }, {});
   drive_test.associate = function(models) {
     // associations can be defined here

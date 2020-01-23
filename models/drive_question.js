@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     drive_question.belongsTo(models.drive_test)
     drive_question.belongsTo(models.question_bank)
-    drive_question.hasMany(model.user_question)
+    drive_question.hasMany(models.user_question)
 
   };
   return drive_question;

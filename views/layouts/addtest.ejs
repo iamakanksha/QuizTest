@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CREATE A TEST</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/cssFiles/studentRegistration.css">
+</head>
+<body>
+
+    <form class="studentform" method="POST" action="/addtest">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Date of test</label>
+            <input type="date" class="form-control" id="exampleFormControlInput1" name="test_date" autocomplete="off" placeholder="Enter the date of test">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select college</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="cid">
+              <%list.forEach(function(college){%>
+                <!--<option><%=college%></option> 
+                cid  is an integer value hence no quotes for value, check again-->
+                <option value=<%=college[0]%>><%=college[1]%></option>
+              <%})%>   
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Number of easy questions</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="easy" autocomplete="off" placeholder="Enter the number of easy questions">
+        </div>
+        
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Number of medium questions</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="medium" autocomplete="off" placeholder="Enter the number of medium questions">
+        </div>
+        
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Number of hard questions</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="hard" autocomplete="off" placeholder="Enter the number of hard questions">
+        </div>
+        
+        <!--<div class="form-group">
+            <label for="exampleFormControlSelect1" >Activate test?</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="is_active">
+              <option value="active">ACTIVATE</option>
+              <option value="inactive">INACTIVE</option>
+            </select>
+        </div> -->
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    
+</body>
+</html>

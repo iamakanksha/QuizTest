@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true
     },
-    college_name: DataTypes.STRING
+    college_name: DataTypes.STRING,
+    
   }, {});
   college.associate = function(models) {
     // associations can be defined here

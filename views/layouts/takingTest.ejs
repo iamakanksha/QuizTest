@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/cssFiles/takingTest.css">
+    <script>
+      function ajaxCallToServer(qid,tid,uid,answer_marked) {
+        //console.log(tid);
+        var xmlhttp = new XMLHttpRequest(); 
+        var url = "/submitAnswer/"+qid+"/"+tid+"/"+uid+"/"+answer_marked
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.send();
+       }
+      // document.getElementById()
+      function ajaxCallToServerForReset(qid,tid,uid) {
+        //console.log(tid);
+        var xmlhttp = new XMLHttpRequest(); 
+        var url = "/resetAnswer/"+qid+"/"+tid+"/"+uid
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.send();
+       }
+    </script>
+</head>
+​ <body>
+        <%var count=1%>
+      <%list.forEach(function(question){%>
+        <div class='question-box' id='<%=count%>'>
+        <form method="GET" action="/submitAnswer" >
+          <p>Q.<%=count%> <%=question[1]%> </p>
+          <input type="hidden" value='<%=question[0]%>' name="qid" >
+          <input type="hidden" value='<%=question[7]%>' name="tid" >
+          <input type="hidden" value='<%=question[6]%>' name="uid" >
+          <br><input class='option' type='radio' value="1" name='answer_marked'>1. <%=question[2]%>
+          <br><input class='option' type='radio' value="2" name='answer_marked'>2. <%=question[3]%>
+          <br><input class='option' type='radio' value="3" name='answer_marked'>3. <%=question[4]%>
+          <br><input class='option' type='radio' value="4" name='answer_marked'>4. <%=question[5]%>
+          <br><input type='button' value='SAVE' onclick="ajaxCallToServer('<%=question[0]%>',tid.value,uid.value,answer_marked.value)">
+          <input type='reset' value='RESET' onclick="ajaxCallToServerForReset('<%=question[0]%>',tid.value,uid.value)">
+      </form></div>
+      <%count++})%>   
+     
+    <!-- <input class="submit-button" type="submit" value="Submit"> -->
+</body>
+</html>

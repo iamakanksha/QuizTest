@@ -27,6 +27,17 @@ module.exports = {
       test_date: {
         type: Sequelize.DATE
       },
+      is_active: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   },
   down: (queryInterface, Sequelize) => {

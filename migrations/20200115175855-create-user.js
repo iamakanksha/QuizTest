@@ -15,7 +15,9 @@ module.exports = {
         type: Sequelize.BIGINT
       },
       emailid: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        //allowNull: false,
+        unique:true
       },
       degree: {
         type: Sequelize.STRING
@@ -32,6 +34,14 @@ module.exports = {
           model:'colleges',
           key: 'cid',
         }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },
