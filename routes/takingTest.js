@@ -9,10 +9,9 @@ const router= express.Router()
 var path = require('path')
 app.use('/cssFiles', express.static(__dirname + '/views/css/'));
 
-
-var l=[]
+var l=[];  
 router.get('/takingTest/:uid/:tid', (req,res)=>{
-  
+
 user_question.findAll({
   attributes: ['qid'],
   where:{
@@ -33,6 +32,7 @@ user_question.findAll({
             }
         }).then(myquestion =>{
           
+          
           var col
           col=(JSON.parse(JSON.stringify(myquestion)))
               col.map(function(item){
@@ -41,18 +41,18 @@ user_question.findAll({
 
         })
         //print here
-  })
+  }
+  )
   
 })
-.then(()=>{
+.then(function(response){
   console.log("query exexuted");
   res.render('layouts/takingTest',{list:l})
-})
 })
     //checking for questions chosen for a drive
     //console.log(l);   
     //res.render('layouts/takingTest',{list:l})
-  
+})
 
 
 //end og get

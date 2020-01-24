@@ -29,7 +29,11 @@ router.get('/submitAnswer/:qid/:tid/:uid/:answer_marked' ,function (req, res) {
             tid: req.params.tid,
             uid: req.params.uid
           }
-      })
+      }).then(function(response){
+          console.log("Success updating the answer")
+          res.send(200);
+      });
+
   })
 })
 
@@ -41,7 +45,9 @@ router.get('/resetAnswer/:qid/:tid/:uid' ,function (req, res) {
           tid: req.params.tid,
           uid: req.params.uid
         }
-      }).then();
+      }).then(function(response){
+        res.send(200);
+      });
     
 })
 

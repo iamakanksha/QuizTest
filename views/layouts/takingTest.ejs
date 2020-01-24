@@ -7,6 +7,28 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/cssFiles/takingTest.css">
     <script>
+      function startTimer(duration, display) {
+      var timer = duration, minutes, seconds;
+      setInterval(function () {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
+
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+
+          display.textContent = minutes + ":" + seconds;
+
+          if (--timer < 0) {
+              timer = duration;
+          }
+      }, 1000);
+    }
+
+window.onload = function () {
+    var sixtyMinutes = 60 * 60,
+        display = document.querySelector('#time');
+    startTimer(sixtyMinutes, display);
+};
       function ajaxCallToServer(qid,tid,uid,answer_marked) {
         //console.log(tid);
         var xmlhttp = new XMLHttpRequest(); 
@@ -27,6 +49,7 @@
     </script>
 </head>
 ​ <body>
+  <header><span id="time">60:00</span></header>
         <%var count=1%>
       <%list.forEach(function(question){%>
         <div class='question-box' id='<%=count%>'>

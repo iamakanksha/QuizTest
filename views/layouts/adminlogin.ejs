@@ -5,15 +5,26 @@
             ADMIN LOGIN
         </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="/cssFiles/adminlogin.css">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+        <link rel="stylesheet" type="text/css" href="/cssFiles/first.css">
     </head>
     <body>
+      <header>
+        <a href="index.html"><img src="images/practest-Logo.jpg" alt="myLogo" id="top-logo" ></a>
+        <div class="navbar">
+          <a href="/adminlogin">Admin Login</a>
+          <a href="/studentLogin">Student Login</a>
+          <a href="/studentRegistration">Register</a>
+            <a href="/">Home</a>  			
+        </div>
+      </header>
+      <div class="pageBackground">
       <div text-allign="center">
-        <form class="adminform" method="POST" action="/adminlogin">
+        <form class="signform" method="POST" action="/adminlogin">
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input type="email" class="form-control" id="exampleInputEmail1" required autocomplete="off" aria-describedby="emailHelp" placeholder="Email" name="adminemail">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
@@ -22,6 +33,20 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
       </div> 
+      </div>
+      <footer style="margin-top:0;">
+        <center><h1 style="color: white; padding-top:20px;" id="contactus">Contact Us</h1></center>
+         <div class="myfooter">
+                <ul style="padding-left:60px;">
+                    <li><span style="color: white;"><i class="fa fa-map" style="color: white;"></i>&nbsp; Address</span><br>
+                        <span ><a href="https://goo.gl/maps/qCbfX24fnrQ2">#132, AECS Layout, IT Park Road Bengaluru- 560037</a></span><br><span style="color: white;"><i class="fa fa-mobile" style="color: white;"></i>&nbsp; Phone</span><br><a  href="tel:9900112255">+91-9900112255</a></span><br><span style="color: white; "><i class="fa fa-envelope" style="color: white;"></i>&nbsp; Email</span><br><span ><a  href="mailto:support@findyourpractest.com">support@findyourpractest.com</a></span><br></li>
+                    <li><span><a style="color: white;" href="#">Follow us on:<br> <a style="color: white;" href="#"><i class="fa fa-facebook" style="color: white;"></i>  facebook.com/practest</a> <br><a style="color: white;" href="#"><i class="fa fa-twitter" style="color: white;"></i> twitter.com/practest</a><br><a style="color: white;" href="#"><i class="fa fa-snapchat-ghost" style="color: white;"></i> snapchat.com/practest</a><br><a style="color: white;" href="#"><i class="fa fa-linkedin" style="color: white;"></i> linkedin.com/practest</a></span>
+                    </li>
+                    <li><span><a style="color:white;">15CSL77</a><br><a style="color:white;">Mini Project</a><br><a style="color:white;">Submitted By</a><br><a>Akanksha Mishra</a><br><a >Adarsh Sharma</a><br><a>Kartik Kashyap</a></span></li>
+                </ul>
+            </div>
+            <br>
+      </footer>
     </body>
 </html>
 

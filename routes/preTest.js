@@ -40,11 +40,7 @@ router.get('/preTest',(req,res)=>{
             
         }).then(()=>{
             res.render("layouts/preTest",{ejsContent})  
-        })
-        
-        
-        
-        
+        })   
     }
     else{
         res.redirect('/studentLogin')
@@ -91,11 +87,14 @@ router.get('/getFetchPopulate',(req,res)=>{
                             })
                             
                         })
-                    })
+                    }).then(function(response){
+                        res.send(200);
+                      })
                 })
             }
             else{
                 console.log("You have logged in before")
+                res.send(200);
             }
         })
     })
