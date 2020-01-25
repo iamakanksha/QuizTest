@@ -4,8 +4,26 @@
     <title>CREATE A TEST</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/cssFiles/studentRegistration.css">
+    <link rel="stylesheet" href="/cssFiles/adminPage.css">
 </head>
 <body>
+    <header>
+        <a href="index.html"><img src="images/Tribe-Logo.jpg" alt="myLogo" id="top-logo"></a>
+        <div class="mynavbar">
+            <a href="/logout">Logout</a>
+            <a href="/adminLandoverPage">View results</a>       
+            <div class="mydropdown">
+                <button class="mydropbtn">Add 
+                </button>
+                <div class="mydropdown-content">
+                    <a href="/addtest">Test</a>
+                    <a href="/addQuestion">Question</a>
+                    <a href="/addCollege">College</a>
+                </div>
+            </div>
+            <a href="/adminLandoverPage">Welcome</a>            
+        </div>
+    </header>
 
     <form class="studentform" method="POST" action="/addtest">
         <div class="form-group">

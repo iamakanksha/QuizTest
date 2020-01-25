@@ -5,6 +5,7 @@ var cookieParser=require('cookie-parser')
 var session=require('express-session')
 var path = require('path')
 var morgan=require('morgan')
+const alert=require('alert-node')
 
 app.use(cookieParser());
 app.use(session({
@@ -48,8 +49,9 @@ app.use(pretest)
 //taking test
 const takingtest=require("./routes/takingTest.js")
 app.use(takingtest)
-
-
+//logout 
+const logOut=require("./routes/logout.js")
+app.use(logOut)
 // student registration page
 const router=require("./routes/studentRegistration.js")
 app.use(router)
@@ -59,6 +61,9 @@ app.use(submitanswer)
 // add test page
 const addTest=require("./routes/addtest.js")
 app.use(addTest)
+
+const addcollege=require("./routes/addCollege.js")
+app.use(addcollege)
 
 const studentlogin=require("./routes/studentLogin.js")
 app.use(studentlogin)

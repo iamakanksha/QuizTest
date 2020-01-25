@@ -30,7 +30,14 @@ attributes: ['cid','college_name']
 })
 
 router.get('/addtest', function (req, res) {
-  res.render('layouts/addtest',{ list: l })
+    if(req.session.user && req.cookies.user_sid){
+    //prevents returning on back button press
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.render('layouts/addtest',{ list: l })
+    }
+    else{
+        res.redirect('/adminlogin')
+    }
 })
 router.post('/addtest' ,function (req, res) {    
 //console.log(req.body.cid)
@@ -118,7 +125,8 @@ drive_test.update({ is_active: "inactive" }, {
                 } else {
                     res.status(400).send('Error in insert new record');
                 }
-                res.send(drive_test);
+                res.status(200);
+                res.redirect('/addtest')
         });
         //end of drive test inseert
     })

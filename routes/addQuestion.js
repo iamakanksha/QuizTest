@@ -12,8 +12,14 @@ var path = require('path')
 // app.use('/cssFiles', express.static(__dirname + '/views/css/'));
 // app.set('../views', path.join(__dirname, 'views/layouts/'));
 router.get('/addQuestion', function (req, res) {
-    
-  res.render('layouts/addQuestion',{ })
+    if(req.session.user && req.cookies.user_sid){
+        //prevents returning on back button press
+        res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+        res.render('layouts/addQuestion')
+        }
+        else{
+            res.redirect('/adminlogin')
+        }
 })
 router.post('/addQuestion' ,function (req, res) {
     console.log(req.body.correct_option)
@@ -27,7 +33,8 @@ router.post('/addQuestion' ,function (req, res) {
         level:req.body.level
     }).then(function (question_bank) {
         if (question_bank) {
-            res.send(question_bank);
+            res.status(200)
+            res.redirect('/addQuestion')
         } else {
             res.status(400).send('Error in insert new record');
         }

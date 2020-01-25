@@ -14,6 +14,7 @@ body{
 header, footer{
 	background-color:#28328c;
 }
+
 footer{
 	padding-bottom: 0px;
 }
@@ -24,17 +25,17 @@ header::after{
 	clear:both;
 }
 
-.navbar {
+.navbar1 {
   overflow: hidden;
   background-color:#28328c;
   width:70%;
   float:right;
-  margin-top:22px;
+  margin-top:8px;
   margin-right:5px;
   margin-bottom:10px;
 }
 
-.navbar a {
+.navbar1 a {
   float: right;
   font-size: 18px;
   color: white;
@@ -59,9 +60,19 @@ header::after{
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar1 a:hover, .dropdown:hover .dropbtn {
   background-color: white;
-  color:black;
+  color:#28328c;
+}
+.navbar1 a.active{
+  color:white;
+  border-bottom:3px white solid;
+  background-color:#28328c;
+}
+.navbar1 a.active:hover{
+  background-color: white;
+  color:#28328c;
+  text-decoration:none;
 }
 
 .dropdown-content {

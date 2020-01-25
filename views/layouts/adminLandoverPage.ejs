@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <title>ADMIN DASHBOARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" type="text/css" href="/cssFiles/first.css"> 
+    
+    <style>
+        body{
+        margin:0;
+        font-family: sans-serif;
+        width:100%;
+        height:400px;
+        background-image: url('adminwelcome.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        position:absolute;
+        }
+        h1{
+            font-size:62px;
+            font-weight:bold;
+            color:white;
+        }
+        #about {
+            margin-top:5%;
+            background:transparent;
+            text-align:justify;
+            align-self:center;
+            width:70%;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 10px;
+            margin-left:auto;
+            margin-right:auto;
+            color:#083b66;
+            z-index: 2;
+        }
+        .jumbotron{
+            background-color:rgba(113, 120, 115,0.5);
+            padding:1%;
+            text-align:center;
+            width:80%;
+            border-radius:25px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="images/Tribe-Logo.jpg" alt="myLogo" id="top-logo"></a>
+        <div class="navbar1">
+            <a href="/logout">Logout</a>
+            <a href="/adminLandoverPage">View results</a>       
+            <div class="dropdown">
+                <button class="dropbtn">Add 
+                </button>
+                <div class="dropdown-content">
+                    <a href="/addtest">Test</a>
+                    <a href="/addQuestion">Question</a>
+                    <a href="/addCollege">College</a>
+                </div>
+            </div>
+            <a class="active" href="/adminLandoverPage">Welcome</a>            
+        </div>
+    </header>
+    <center>
+
+        <div class="container" style="margin-top:10%;">
+            <div class="jumbotron">
+                <h1>Welcome to admin dashboard</h1>      
+            </div>
+    
+        </div>
+    </center>
+</body>
+</html>

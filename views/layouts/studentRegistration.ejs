@@ -4,9 +4,19 @@
     <title>REGISTRATION FORM</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/cssFiles/studentRegistration.css">
+    <link rel="stylesheet" href="/cssFiles/first.css">
 </head>
 <body>
-
+  <header>
+    <a href="index.html"><img src="images/practest-Logo.jpg" alt="myLogo" id="top-logo" ></a>
+    <div class="navbar1">
+      <a href="/adminlogin">Admin Login</a>
+      <a href="/studentLogin">Student Login</a>
+      <a class="active" href="/studentRegistration">Register</a>
+        <a href="/">Home</a>  			
+    </div>
+  </header>
+  
     <form class="studentform" method="POST" action="/studentRegistration">
         <div class="form-group">
             <label for="exampleFormControlInput1">Student Name</label>

@@ -6,12 +6,8 @@ const bodyParser= require('body-parser')
 var md5=require('blueimp-md5')
 const router= express.Router()
 //app.set('view engine', 'ejs')
-
+const alert=require('alert-node')
 var path = require('path')
-// app.use(bodyParser())
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use('/cssFiles', express.static(__dirname + '/views/css/'));
-// app.set('../views', path.join(__dirname, 'views/layouts/'));
 var l=[]
 var col
 college.findAll({
@@ -26,14 +22,19 @@ college.findAll({
     
 })
 
-
 router.get('/studentRegistration', function (req, res) {
     
-
   res.render('layouts/studentRegistration',{ list: l })
 })
 router.post('/studentRegistration' ,function (req, res) {
-    //console.log(req.body.uname)
+    user.findOne({
+        attributes:['emailid'],
+        where:{
+            emailid:req.body.emailid,
+        }
+    }
+    ).then(user_found=>{
+    if(!user_found){
     return user.create({
         uname:req.body.uname,
         emailid:req.body.emailid,
@@ -44,11 +45,21 @@ router.post('/studentRegistration' ,function (req, res) {
         upassword:md5(req.body.upassword)
     }).then(function (user) {
         if (user) {
+            res.status(200)
+            alert("Registration complete.Log in to take the test")
             res.redirect('/studentLogin');
         } else {
             res.status(400).send('Error in insert new record');
         }
-    });
+    })
+    //end of if
+    }
+    else{
+        res.status(200);
+        alert("You have already registered with this email address. Sign in to take the test!");
+        res.redirect('/studentLogin');
+    }
+})
     
 })
 
