@@ -1,72 +1,110 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/cssFiles/takingTest.css">
     <script>
-      function startTimer(duration, display) {
-      var timer = duration, minutes, seconds;
-      setInterval(function () {
-          minutes = parseInt(timer / 60, 10);
-          seconds = parseInt(timer % 60, 10);
-
-          minutes = minutes < 10 ? "0" + minutes : minutes;
-          seconds = seconds < 10 ? "0" + seconds : seconds;
-
-          display.textContent = minutes + ":" + seconds;
-
-          if (--timer < 0) {
-              timer = duration;
-          }
-      }, 1000);
-    }
-
-window.onload = function () {
-    var sixtyMinutes = 60 * 60,
-        display = document.querySelector('#time');
-    startTimer(sixtyMinutes, display);
-};
       function ajaxCallToServer(qid,tid,uid,answer_marked) {
-        //console.log(tid);
         var xmlhttp = new XMLHttpRequest(); 
-        var url = "/submitAnswer/"+qid+"/"+tid+"/"+uid+"/"+answer_marked
+        var url = "/submitAnswer/"+qid+"/"+tid+"/"+answer_marked
         xmlhttp.open("GET", url, true);
         xmlhttp.setRequestHeader("Content-type", "application/json");
         xmlhttp.send();
-       }
-      // document.getElementById()
+      }
       function ajaxCallToServerForReset(qid,tid,uid) {
-        //console.log(tid);
         var xmlhttp = new XMLHttpRequest(); 
-        var url = "/resetAnswer/"+qid+"/"+tid+"/"+uid
+        var url = "/resetAnswer/"+qid+"/"+tid
         xmlhttp.open("GET", url, true);
         xmlhttp.setRequestHeader("Content-type", "application/json");
         xmlhttp.send();
-       }
-    </script>
+      }
+      function ajaxCallForAnswer(qid){
+        var xmlhttp = new XMLHttpRequest();
+        var url = "/answer/"+qid
+        
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            
+            if(this.responseText!=""){
+              document.getElementById(this.responseText).checked = true;
+            }
+          }
+        }
+        xmlhttp.send();
+      }
+      var count=0;
+      function ajaxCallforQ(qid_json) {
+        var xmlhttp = new XMLHttpRequest(); 
+        var json_type=JSON.parse(qid_json)
+        var url = "/question/"+json_type[count].qid
+        
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var josn_response=JSON.parse(this.responseText)
+            count++;
+            document.getElementById("ques").innerHTML =
+            `<p>Q.`+count+` `+josn_response[0].question +`</p>
+            <input type="hidden" value='`+josn_response[0].qid+`' name="qid" >
+            <input type="hidden" value='<%=tid%>' name="tid" >
+            <input type="hidden" value='<%=uid%>' name="uid" >
+            <br><input class='option' type='radio' id="1" value="1" name='answer_marked'>1. `+josn_response[0].option1+`
+            <br><input class='option' type='radio' id="2" value="2" name='answer_marked'>2. `+josn_response[0].option2+`
+            <br><input class='option' type='radio' id="3" value="3" name='answer_marked'>3. `+josn_response[0].option3+`
+            <br><input class='option' type='radio' id="4" value="4" name='answer_marked'>4. `+josn_response[0].option4+`
+            <br><input type='button' value='SAVE' onclick="ajaxCallToServer(`+josn_response[0].qid+`,tid.value,uid.value,answer_marked.value)">
+            <input type='reset' value='RESET' onclick="ajaxCallToServerForReset(`+josn_response[0].qid+`,tid.value,uid.value)">
+            `
+            document.getElementById("button_next").value="Next"
+            if(count==json_type.length){
+              
+              document.getElementById("button_next").style.display="none"
+            }
+            else{
+              document.getElementById("button_next").style.display="block"
+            }
+            
+            if(count==1){
+              document.getElementById("button_prev").style.display="none"
+            }
+            else{
+              document.getElementById("button_prev").style.display="block"
+            }
+            ajaxCallForAnswer(json_type[count-1].qid)
+            
+          }
+        }
+        xmlhttp.send();
+        
+      }
+      function prevQ(qid_json){
+        count=count-2;
+        ajaxCallforQ(qid_json)
+        
+      }
+      window.onload=function(){
+        document.getElementById("button_next").click();
+      };
+      </script>
 </head>
 ​ <body>
-  <header><span id="time">60:00</span></header>
-        <%var count=1%>
-      <%list.forEach(function(question){%>
-        <div class='question-box' id='<%=count%>'>
-        <form method="GET" action="/submitAnswer" >
-          <p>Q.<%=count%> <%=question[1]%> </p>
-          <input type="hidden" value='<%=question[0]%>' name="qid" >
-          <input type="hidden" value='<%=question[7]%>' name="tid" >
-          <input type="hidden" value='<%=question[6]%>' name="uid" >
-          <br><input class='option' type='radio' value="1" name='answer_marked'>1. <%=question[2]%>
-          <br><input class='option' type='radio' value="2" name='answer_marked'>2. <%=question[3]%>
-          <br><input class='option' type='radio' value="3" name='answer_marked'>3. <%=question[4]%>
-          <br><input class='option' type='radio' value="4" name='answer_marked'>4. <%=question[5]%>
-          <br><input type='button' value='SAVE' onclick="ajaxCallToServer('<%=question[0]%>',tid.value,uid.value,answer_marked.value)">
-          <input type='reset' value='RESET' onclick="ajaxCallToServerForReset('<%=question[0]%>',tid.value,uid.value)">
-      </form></div>
-      <%count++})%>   
-     
-    <!-- <input class="submit-button" type="submit" value="Submit"> -->
+  
+  <div class='question-box'>
+    <form method="GET" action="/submitAnswer" id="ques">
+      
+      
+    </form>
+  </div>
+  <input type="button" id="button_next" value='Next' style="display: none;" onclick="ajaxCallforQ('<%=JSON.stringify(qid_json)%>')">
+  <input type='button' id="button_prev" value='Previous' style="display: none;" onclick="prevQ('<%=JSON.stringify(qid_json)%>')">
+  <button>
+    <a href="/endTest/<%=tid%>">End Test</a>
+  </button>
 </body>
 </html>

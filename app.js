@@ -18,7 +18,6 @@ app.use(session({
     } 
 }));
 
-
 app.set('view engine', 'ejs')
 app.use(bodyParser())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -34,8 +33,6 @@ app.use((req,res,next)=>{
     next();
 })
 
-
-
 //home page
 const home =require("./routes/home.js")
 app.use(home)
@@ -45,7 +42,6 @@ app.use(addquestion)
 //pretest
 const pretest=require("./routes/preTest.js")
 app.use(pretest)
-
 //taking test
 const takingtest=require("./routes/takingTest.js")
 app.use(takingtest)
@@ -61,17 +57,18 @@ app.use(submitanswer)
 // add test page
 const addTest=require("./routes/addtest.js")
 app.use(addTest)
-
+//adding a new college
 const addcollege=require("./routes/addCollege.js")
 app.use(addcollege)
-
+//student login
 const studentlogin=require("./routes/studentLogin.js")
 app.use(studentlogin)
-
-
-
 //admin login route
 const adminlog=require("./routes/adminlogin.js")
 app.use(adminlog)
+//on submission of test
+const endtest=require("./routes/endTest")
+app.use(endtest)
+
 
 app.listen(3000, () => console.log(`server started`))

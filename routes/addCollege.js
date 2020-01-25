@@ -39,7 +39,7 @@ router.post('/addCollege' ,function (req, res) {
     college.findOne({
         attributes:['cid'],
         where:{
-            college_name:req.body.college_name,
+            college_name:req.body.college_name
         }
     }
     ).then(college_found=>{
