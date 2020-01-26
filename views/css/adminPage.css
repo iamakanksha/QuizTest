@@ -86,5 +86,12 @@ header::after{
     color:#28328c;
     text-decoration:none;
   }
-  
+  .adminform{
+    width: 50%;
+    border:2px black solid;
+    padding:1%;
+    margin-top:3%;
+    margin-left:25%;
+    border-radius: 25px;
+  }
   

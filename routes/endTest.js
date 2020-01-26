@@ -13,6 +13,7 @@ var path = require('path')
 app.use('/cssFiles', express.static(__dirname + '/views/css/'));
 router.get('/endTest/:tid',(req,res)=>{
     if(req.session.user && req.cookies.user_sid){
+        res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
         //compute score of the user who appeared for 'tid'
         var no_of_correct=0;
         var no_of_wrong=0;
@@ -63,6 +64,7 @@ router.get('/endTest/:tid',(req,res)=>{
         })
         Promise.all([promise1,promise2,promise3,promise4,promise5,promise6]).then(()=>{
             res.clearCookie('user_sid')
+
             req.session.destroy((err) => {
                 if(err) {
                     return console.log(err);

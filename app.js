@@ -14,7 +14,7 @@ app.use(session({
     resave:false,
     saveUninitialized:false,
     cookie:{
-        expires:60000
+        expires:3600000000
     } 
 }));
 
@@ -22,6 +22,8 @@ app.set('view engine', 'ejs')
 app.use(bodyParser())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/cssFiles', express.static(__dirname + '/views/css/'));
+app.use('/public', express.static(__dirname + '/public/'));
+
 app.set('/views', path.join(__dirname, 'views/layouts/'));
 app.use( express.static( "public" ) );
 
@@ -69,6 +71,8 @@ app.use(adminlog)
 //on submission of test
 const endtest=require("./routes/endTest")
 app.use(endtest)
-
+//viewing college results
+const viewresults=require("./routes/viewResults")
+app.use(viewresults)
 
 app.listen(3000, () => console.log(`server started`))

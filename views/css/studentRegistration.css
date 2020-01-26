@@ -1,3 +1,8 @@
 .studentform{
     width: 50%;
+    border:2px black solid;
+    padding:1%;
+    margin-top:3%;
+    margin-left:25%;
+    border-radius: 25px;
 }
