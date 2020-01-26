@@ -12,11 +12,15 @@ const router= express.Router()
 var path = require('path')
 app.use('/cssFiles', express.static(__dirname + '/views/css/'));
 
-
+const test_duration=3600000
 router.get('/takingTest/:uid/:tid', (req,res)=>{
   
   
   if(req.session.user && req.cookies.user_sid){
+    if(!req.session.endTime){
+      var startTime=new Date().getTime();
+      req.session.endTime=startTime+test_duration
+    }
     res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     user_question.findAll({
       attributes: ['qid'],
@@ -27,7 +31,7 @@ router.get('/takingTest/:uid/:tid', (req,res)=>{
       }
       
     }).then( (questions)=> {
-      res.render('layouts/takingTest',{qid_json:questions,cid:req.session.user.cid,uid:req.session.user.uid,userName:req.session.user.emailid,tid:req.params.tid})
+      res.render('layouts/takingTest',{qid_json:questions,cid:req.session.user.cid,uid:req.session.user.uid,userName:req.session.user.emailid,tid:req.params.tid,endTime:req.session.endTime})
     })
   }
   else{
@@ -50,7 +54,10 @@ router.get('/question/:qid',(req,res)=>{
 router.get('/answer/:qid',(req,res)=>{
   user_question.findOne({
     attributes:['answer_marked'],
-    where:{qid:req.params.qid}
+    where:{
+      qid:req.params.qid,
+      uid:req.session.user.uid
+    }
   }).then((answer)=>{
     res.send(answer.answer_marked)
   })
