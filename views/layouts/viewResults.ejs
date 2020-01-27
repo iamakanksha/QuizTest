@@ -8,13 +8,68 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/cssFiles/studentRegistration.css">
     <link rel="stylesheet" href="/cssFiles/adminPage.css">
+
+    <script>
+        const objecttoCSV=function(data){
+            const csvrows=[];
+            const headers=Object.keys(data[0])
+            csvrows.push(headers.join(','))
+            for(const row of data){
+                const values = headers.map(header=>{
+                    const escaped=(''+row[header]).replace(/"/g,'\\"');
+                    return `"${escaped}"`
+                });
+                csvrows.push(values.join(','));
+            }
+            return csvrows.join('\n');
+
+        };
+
+        const download=function(data){
+            const blob =new Blob([data],{type:'text/csv'});
+            const url=window.URL.createObjectURL(blob);
+            const a=document.createElement('a');
+            a.setAttribute('hidden','');
+            a.setAttribute('href',url);
+            a.setAttribute('download','download.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+        }
+
+
+        function csv(cid){
+            var xmlhttp = new XMLHttpRequest(); 
+        var url = "/fetchCollegeResults/"+cid
+        xmlhttp.open("GET", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              
+            const json= JSON.parse(this.responseText)
+            
+            const data = json.map(row=>({
+                uname: row.uname,
+                emailid: row.emailid,
+                score: row.score,
+            }));
+            const csvData=objecttoCSV(data)
+            download(csvData);
+            
+          }
+        }
+        xmlhttp.send();
+
+        }
+    </script>
 </head>
 <body>
     <header>
-        <a href="index.html"><img src="images/Tribe-Logo.jpg" alt="myLogo" id="top-logo"></a>
         <div class="mynavbar">
+            <h3>PRACTEST</h3>
             <a href="/logout">Logout</a>
-            <a href="/adminLandoverPage">View results</a>       
+            <a class="active" href="/viewResults">View results</a>       
             <div class="mydropdown">
                 <button class="mydropbtn">Add 
                 </button>
@@ -27,17 +82,17 @@
             <a href="/adminLandoverPage">Welcome</a>            
         </div>
     </header>
-    <form action="/fetchCollegeResults" method="POST">
+    <form >
         <div class="form-group">
 
-            <label for="exampleFormControlSelect1">Select college</label>
+        <label for="exampleFormControlSelect1">Select college</label>
         <select class="form-control" id="exampleFormControlSelect1" name="cid">
               <%list.forEach(function(college){%>
                 <option value=<%=college[0]%>><%=college[1]%></option>
               <%})%> 
         </select>
         </div>
-        <input type="submit" value="yo">
+        <input type="button" onclick="csv(cid.value)">
         
     </form>
     

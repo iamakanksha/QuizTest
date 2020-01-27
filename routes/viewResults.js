@@ -10,25 +10,25 @@ const bodyParser= require('body-parser')
 var path = require('path')
 app.use(bodyParser())
 
-//fetching colleges
-var l=[]
-var col
-college.findAll({
-attributes: ['cid','college_name']
-}).then(college =>{
-    //received a json object
-    col=(JSON.parse(JSON.stringify(college)))
-    col.map(function(item){
-    l.push([item.cid,item.college_name])
-    })
-    //console.log(l);
-})
-
 router.get('/viewResults',(req,res)=>{
     if(req.session.user && req.cookies.user_sid){
-        //prevents returning on back button press
-        res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-        res.render('layouts/viewResults',{ list: l })
+        //fetching colleges
+        var l=[]
+        var col
+        college.findAll({
+            attributes: ['cid','college_name']
+        }).then(college =>{
+            //received a json object
+            col=(JSON.parse(JSON.stringify(college)))
+            col.map(function(item){
+                l.push([item.cid,item.college_name])
+            })
+            //console.log(l);
+        }).then(()=>{
+            //prevents returning on back button press
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.render('layouts/viewResults',{ list: l })
+        })
         }
         else{
             res.redirect('/adminlogin')
@@ -36,53 +36,28 @@ router.get('/viewResults',(req,res)=>{
 })
 
 
-router.post('/fetchCollegeResults',(req,res)=>{
+router.get('/fetchCollegeResults/:cid',(req,res)=>{
     if(req.session.user && req.cookies.user_sid){
-        
-        var csvWriter = createCsvWriter({
-            path: './public/out.csv',
-            header: [
-              {id: 'uname', title: 'Name'},
-              {id: 'score', title: 'Score'},
-            ]
-        });
-
-        const promise1=
         drive_test.findOne({
             attributes:['tid'],
             where:{
-                cid:req.body.cid,
+                cid:req.params.cid,
                 is_active:"active"
             }
-        });
-        const promise2=promise1.then(function(myDrive){
-            console.log("mydrive:"+myDrive.tid+"\n")
+        }).then(function(myDrive){
             user_test.findAll({
-                attributes:['uid','score'],
+                attributes:['uname','emailid','score'],
                 where:{
                     tid:myDrive.tid
-                }
-            }).then(function(userscores){
-                console.log(userscores)
-                userscores.forEach((key)=>{
-                    var data = [
-                        {
-                          uname: key.uid,
-                          score: key.score,
-                          
-                        }
-                    ];
-                    csvWriter.writeRecords(data)
-
-                })   
-            });
-
-        });
-        
-            Promise.all([promise1,promise2]).then(()=>{
-                res.sendFile('public/out.csv');
+                },
+                order:[
+                    ['score','DESC']
+                ],
+            }).then(function (userscores){
+                res.send(userscores);
+            })
             
-            });
+        })
         
     }
     //if no session

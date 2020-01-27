@@ -26,11 +26,19 @@ header::after{
 .navbar1 {
   overflow: hidden;
   background-color:#28328c;
-  width:70%;
+  width:100%;
   float:right;
   margin-top:8px;
   margin-right:5px;
   margin-bottom:10px;
+}
+.navbar1 h3{
+  color:white;
+  font-weight:bold;
+  font-size:26px;
+  margin-left:25px;
+  margin-top:5px;
+  float:left
 }
 
 .navbar1 a {

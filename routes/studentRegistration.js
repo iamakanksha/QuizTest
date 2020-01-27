@@ -8,23 +8,25 @@ const router= express.Router()
 //app.set('view engine', 'ejs')
 const alert=require('alert-node')
 var path = require('path')
-var l=[]
-var col
-college.findAll({
-    attributes: ['cid','college_name']
-}).then(college =>{
-    //received a json object
-    col=(JSON.parse(JSON.stringify(college)))
-    col.map(function(item){
-      l.push([item.cid,item.college_name])
-    })
-    //console.log(l);
-    
-})
+
 
 router.get('/studentRegistration', function (req, res) {
-    
-  res.render('layouts/studentRegistration',{ list: l })
+    var l=[]
+    var col
+    college.findAll({
+        attributes: ['cid','college_name']
+    }).then(college =>{
+        //received a json object
+        col=(JSON.parse(JSON.stringify(college)))
+        col.map(function(item){
+            l.push([item.cid,item.college_name])
+        })
+        //console.log(l);
+        
+    }).then(()=>{
+        res.render('layouts/studentRegistration',{ list: l })
+
+    })
 })
 router.post('/studentRegistration' ,function (req, res) {
     user.findOne({
@@ -35,7 +37,7 @@ router.post('/studentRegistration' ,function (req, res) {
     }
     ).then(user_found=>{
     if(!user_found){
-    return user.create({
+    user.create({
         uname:req.body.uname,
         emailid:req.body.emailid,
         dob:req.body.dob,
@@ -51,6 +53,8 @@ router.post('/studentRegistration' ,function (req, res) {
         } else {
             res.status(400).send('Error in insert new record');
         }
+    }).catch((err)=>{
+        res.redirect('/studentRegistration')
     })
     //end of if
     }

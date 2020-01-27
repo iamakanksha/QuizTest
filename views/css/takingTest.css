@@ -2,14 +2,18 @@
     background-color: white;
     border-radius: 15px;
     padding: 10px;
-    box-shadow: 5px 10px rgba(13, 104, 28, 0.7);
+    box-shadow: 5px 10px rgba(48, 39, 2, 0.7);
     margin-top: 40px;
     margin-left: 40px;
     margin-right: 40px;
+    font-size: x-large;
+    
 
 }
 body{
-    background-color: rgb(41, 179, 48);
+    background-color: rgb(124, 124, 124);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin:0
 }
 .submit-button{
@@ -23,18 +27,7 @@ body{
     margin-top: 20px;
 }
 
-header, footer{
-	background-color:#28328c;
-}
-footer{
-	padding-bottom: 0px;
-}
-header{
-    position:fixed;
-    width:100%;
-    height:10%;
-    top:0;
-}
+
 #time{
     color:white;
     font-weight:bold;
@@ -44,4 +37,65 @@ header{
     margin-top:1%;  
     border:white 2px dashed;
     padding:4px; 
+}
+.clock{
+    display: block;
+    background-color: #28328c;
+    height: 30px;
+    font-size: xx-large;
+    margin-top: -26px;
+    padding: 30px;
+}
+#clock{
+    float: right;
+    margin-right: 2%;
+    color: white;
+}
+#button_next{
+    margin-left: 2%;
+    margin-top: 150px;
+    width: 110px;
+    font-size: 25px;
+    color: rgb(148, 166, 247);
+    background-color:#28328c;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(1, 8, 46, 0.7);
+}
+#button_prev{
+    float: right;
+    margin-right: 2%;
+    margin-top: 150px;
+    width: 110px;
+    font-size: 25px;
+    color: rgb(148, 166, 247);
+    background-color:#28328c;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(1, 8, 46, 0.7);
+}
+#timeup{
+    color: rgb(148, 166, 247);
+}
+.timeup{
+    position: absolute;
+    left: 40%;
+    margin-top: 150px;
+    width: 150px;
+    font-size: x-large;
+    border-radius: 10px;
+    background-color:#28328c;
+    box-shadow: 5px 5px rgba(1, 8, 46, 0.7);
+    
+}
+.saveReset{
+    font-family: 'Courier New', Courier, monospace;
+    width: 100px;
+    color: rgb(148, 166, 247);
+    background-color:#28328c;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 25px;
+}
+#logo{
+    margin-left: 2%;
+    color: white;
 }

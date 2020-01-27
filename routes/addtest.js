@@ -5,6 +5,7 @@ const college = require('../models').college;
 const drive_test = require('../models').drive_test;
 const drive_question = require('../models').drive_question;
 const question_bank = require('../models').question_bank;
+
 const bodyParser= require('body-parser')
 
 const router= express.Router()
@@ -15,25 +16,30 @@ var path = require('path')
 // app.use(bodyParser.urlencoded({ extended: false }))
 // app.use('/cssFiles', express.static(__dirname + '/views/css/'));
 // app.set('../views', path.join(__dirname, 'views/layouts/'));
-var l=[]
-var col
-college.findAll({
-attributes: ['cid','college_name']
-}).then(college =>{
-    //received a json object
-    col=(JSON.parse(JSON.stringify(college)))
-    col.map(function(item){
-    l.push([item.cid,item.college_name])
-    })
-    //console.log(l);
-
-})
 
 router.get('/addtest', function (req, res) {
     if(req.session.user && req.cookies.user_sid){
     //prevents returning on back button press
-    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-    res.render('layouts/addtest',{ list: l })
+    var l=[]
+    var col
+    college.findAll({
+        attributes: ['cid','college_name']
+    }).then(college =>{
+        //received a json object
+        col=(JSON.parse(JSON.stringify(college)))
+        col.map(function(item){
+            l.push([item.cid,item.college_name])
+        })
+        //console.log(l);
+        
+    }).then(()=>{
+        res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+        res.render('layouts/addtest',{ list: l })
+
+    })
+    
+
+    
     }
     else{
         res.redirect('/adminlogin')
@@ -119,15 +125,14 @@ drive_test.update({ is_active: "inactive" }, {
                 //console.log(hard_questions)  
             });
             //end of one set
-                
-                    
-
                 } else {
                     res.status(400).send('Error in insert new record');
                 }
                 res.status(200);
                 res.redirect('/addtest')
-        });
+        }).catch((err)=>{
+            res.redirect('/addtest')
+        })
         //end of drive test inseert
     })
     

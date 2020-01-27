@@ -26,6 +26,14 @@ module.exports = {
       score: {
         type: Sequelize.INTEGER
       },
+      emailid: {
+        type:Sequelize.STRING,
+        
+      },
+      uname:{
+        type:Sequelize.STRING,
+        
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

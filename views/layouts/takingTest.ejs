@@ -9,9 +9,10 @@
       var f_time
       const sec=1000
       const min=60
+      var timer
       function start_timer(final_time) {
         f_time=final_time
-        setInterval(clock,1000);
+        timer=setInterval(clock,1000);
       }
       
       function clock(){
@@ -21,9 +22,10 @@
         time_left_min=Math.floor(time_left/min)
         time_left_sec=time_left%min
         var time_display=time_left_min+":"+time_left_sec
-        document.getElementById('clock').innerHTML=time_display
+        document.getElementById('clock').innerHTML="Time left: "+time_display
         
-        if(time_display.localeCompare("0:0")==0){
+        if(time_left==0){
+          clearInterval(timer)
           document.getElementById("timeup").click()
         }
       }
@@ -79,8 +81,8 @@
             <br><input class='option' type='radio' id="2" value="2" name='answer_marked'>2. `+josn_response[0].option2+`
             <br><input class='option' type='radio' id="3" value="3" name='answer_marked'>3. `+josn_response[0].option3+`
             <br><input class='option' type='radio' id="4" value="4" name='answer_marked'>4. `+josn_response[0].option4+`
-            <br><input type='button' value='SAVE' onclick="ajaxCallToServer(`+josn_response[0].qid+`,tid.value,uid.value,answer_marked.value)">
-            <input type='reset' value='RESET' onclick="ajaxCallToServerForReset(`+josn_response[0].qid+`,tid.value,uid.value)">
+            <br><input type='button' class='saveReset' value='SAVE' onclick="ajaxCallToServer(`+josn_response[0].qid+`,tid.value,uid.value,answer_marked.value)">
+            <input type='reset' class='saveReset' value='RESET' onclick="ajaxCallToServerForReset(`+josn_response[0].qid+`,tid.value,uid.value)">
             `
             document.getElementById("button_next").value="Next"
             if(count==json_type.length){
@@ -88,14 +90,14 @@
               document.getElementById("button_next").style.display="none"
             }
             else{
-              document.getElementById("button_next").style.display="block"
+              document.getElementById("button_next").style.display="inline"
             }
             
             if(count==1){
               document.getElementById("button_prev").style.display="none"
             }
             else{
-              document.getElementById("button_prev").style.display="block"
+              document.getElementById("button_prev").style.display="inline"
             }
             ajaxCallForAnswer(json_type[count-1].qid)
             
@@ -116,7 +118,9 @@
       </script>
 </head>
 ​ <body>
-  <div id='clock'>
+  <div class="clock">
+    <span id="logo">PRACTEST</span>
+    <span id='clock'></span>
   </div>
   <input type="button" id="time_clock" style="display: none;" onclick="start_timer('<%=endTime%>')">
   <div class='question-box'>
@@ -127,7 +131,7 @@
   </div>
   <input type="button" id="button_next" value='Next' style="display: none;" onclick="ajaxCallforQ('<%=JSON.stringify(qid_json)%>')">
   <input type='button' id="button_prev" value='Previous' style="display: none;" onclick="prevQ('<%=JSON.stringify(qid_json)%>')">
-  <button>
+  <button class="timeup">
     <a id="timeup" href="/endTest/<%=tid%>">End Test</a>
   </button>
 </body>

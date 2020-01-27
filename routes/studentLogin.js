@@ -7,6 +7,7 @@ var session=require('express-session')
 var bodyParser=require('body-parser')
 var morgan=require('morgan')
 const user = require('../models').user;
+const user_test = require('../models').user_test;
 var md5=require('blueimp-md5')
 const router= express.Router()
 
@@ -17,18 +18,16 @@ const router= express.Router()
 //     }
 //     next();
 // })
-var ejsContent={userName:'',loggedin:false,title:"not logged in",uid:"",cid:""}
-
 
 router.get('/studentLogin',(req,res)=>{ 
-    res.render("layouts/studentLogin",{ejsContent})
+    res.render("layouts/studentLogin")
 })
 
 router.post('/studentLogin',(req,res)=>{
     var emailid=req.body.emailid
     var upassword=md5(req.body.upassword)
     user.findOne({
-        attributes:['emailid','upassword','uid','cid'],
+        attributes:['uname','emailid','upassword','uid','cid'],
         where:{
             emailid:emailid,
             upassword:upassword

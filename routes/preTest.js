@@ -18,6 +18,7 @@ const router= express.Router()
 router.get('/preTest',(req,res)=>{
 
     if(req.session.user && req.cookies.user_sid){
+
         res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'); 
         drive_test.findOne({
             attributes:['tid'],
@@ -26,11 +27,32 @@ router.get('/preTest',(req,res)=>{
                 is_active:"active"
             }
         }).then(function(theDrive){
-            
-            res.render("layouts/preTest",{userName:req.session.user.emailid,cid:req.session.user.cid,tid:theDrive.tid,uid:req.session.user.uid})
-            
+            user_test.findOne({
+                attributes:['score'],
+                where:{
+                    tid:theDrive.tid,
+                    uid:req.session.user.uid
+                }
+            }).then((userscore)=>{
+                if(!userscore||userscore.score==null){
+                    res.render("layouts/preTest",{userName:req.session.user.emailid,cid:req.session.user.cid,tid:theDrive.tid,uid:req.session.user.uid})
+                }
+                else{
+                    res.clearCookie('user_sid')
 
+                    req.session.destroy((err) => {
+                        if(err) {
+                            return console.log(err);
+                        }
+                        else{
+                            res.render('layouts/endTest');
+                        }
+                    });
+                }       
+            })
             
+        }).catch((err)=>{
+            res.redirect('/studentLogin')
         })
     }
     else{
@@ -59,7 +81,10 @@ router.get('/getFetchPopulate',(req,res)=>{
                 if(!mineDrive){
                     user_test.create({
                         uid:req.session.user.uid,
-                        tid:myDrive.tid
+                        tid:myDrive.tid,
+                        uname:req.session.user.uname,
+                        emailid:req.session.user.emailid,
+
                     }).then(function(mineDrive){
                         drive_question.findAll({
                             attributes:['qid'],

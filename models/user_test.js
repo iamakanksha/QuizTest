@@ -21,7 +21,13 @@ module.exports = (sequelize, DataTypes) => {
         key: 'tid',
       }
     },
-    score: DataTypes.INTEGER
+    score: DataTypes.INTEGER,
+    emailid:DataTypes.STRING,
+    
+  
+    uname:DataTypes.STRING,
+    
+
   }, {});
   user_test.associate = function(models) {
     // associations can be defined here
