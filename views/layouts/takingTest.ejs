@@ -51,7 +51,6 @@
         xmlhttp.setRequestHeader("Content-type", "application/json");
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             
             if(this.responseText!=""){
               document.getElementById(this.responseText).checked = true;
@@ -62,6 +61,7 @@
       }
       var count=0;
       function ajaxCallforQ(qid_json) {
+        document.getElementById('button_next').style.display="none"
         var xmlhttp = new XMLHttpRequest(); 
         var json_type=JSON.parse(qid_json)
         var url = "/question/"+json_type[count].qid
@@ -107,6 +107,7 @@
         
       }
       function prevQ(qid_json){
+        document.getElementById('button_prev').style.display="none"
         count=count-2;
         ajaxCallforQ(qid_json)
         

@@ -30,7 +30,7 @@ router.get('/endTest/:tid',(req,res)=>{
         });
         const promise2=promise1.then(function(result) {
             no_of_correct=result.count;
-            console.log(no_of_correct);
+            //console.log(no_of_correct);
         });
         
         //no of incorrect responses sent
@@ -46,12 +46,12 @@ router.get('/endTest/:tid',(req,res)=>{
         const promise4=
         promise3.then(function(result) {
             no_of_wrong=result.count;
-            console.log(no_of_wrong);
+            //console.log(no_of_wrong);
         });
         const promise5=
         promise4.then(function(result){
             user_score=no_of_correct-no_of_wrong;
-            console.log(user_score);
+            //console.log(user_score);
         })
         const promise6=
         promise5.then(()=>{user_test.update({score:user_score},

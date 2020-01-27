@@ -4,15 +4,9 @@ const bodyParser= require('body-parser')
 const college = require('../models').college;
 var md5=require('blueimp-md5')
 const router= express.Router()
-//const flash=require('req-flash')
-//app.set('view engine', 'ejs')
-//app.use(flash())
-//req.flash('alert');
+
 var path = require('path')
-// app.use(bodyParser())
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use('/cssFiles', express.static(__dirname + '/views/css/'));
-// app.set('../views', path.join(__dirname, 'views/layouts/'));
+
 
 router.get('/adminlogin', function (req, res) {
     
@@ -26,10 +20,7 @@ router.post('/adminlogin' ,function (req, res) {
     }
     else{
         res.redirect('/adminlogin')
-    
-        //req.flash('alert','fghfh')
-        //res.redirect('/adminlogin')
-        
+
     }
     
 });

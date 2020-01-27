@@ -7,10 +7,6 @@ const router= express.Router()
 //app.set('view engine', 'ejs')
 
 var path = require('path')
-// app.use(bodyParser())
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use('/cssFiles', express.static(__dirname + '/views/css/'));
-// app.set('../views', path.join(__dirname, 'views/layouts/'));
 router.get('/addQuestion', function (req, res) {
     if(req.session.user && req.cookies.user_sid){
         //prevents returning on back button press

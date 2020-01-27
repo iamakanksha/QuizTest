@@ -34,6 +34,8 @@ router.get('/submitAnswer/:qid/:tid/:answer_marked' ,function (req, res) {
       .then(()=>{
         res.sendStatus(200)
       })
+    }).catch((err)=>{
+      res.redirect('/takingTest')
     })
   }
 })

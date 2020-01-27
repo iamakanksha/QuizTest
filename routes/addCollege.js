@@ -7,7 +7,6 @@ const router= express.Router()
 // const flash=require('express-flash')
 // router.use(flash())
 const alert=require('alert-node')
-//app.set('view engine', 'ejs')
 
 var path = require('path')
 

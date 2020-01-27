@@ -82,9 +82,10 @@
             <a href="/adminLandoverPage">Welcome</a>            
         </div>
     </header>
-    <form >
+    <center><h3>COLLEGE-LEVEL RESULTS</h3></center>
+    <form class="adminform">
         <div class="form-group">
-
+        <legend>Download results in .csv format</legend>
         <label for="exampleFormControlSelect1">Select college</label>
         <select class="form-control" id="exampleFormControlSelect1" name="cid">
               <%list.forEach(function(college){%>
@@ -92,7 +93,7 @@
               <%})%> 
         </select>
         </div>
-        <input type="button" onclick="csv(cid.value)">
+        <input type="button" onclick="csv(cid.value)" value="DOWNLOAD NOW" class="btn btn-primary">
         
     </form>
     

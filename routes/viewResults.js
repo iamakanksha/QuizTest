@@ -28,6 +28,8 @@ router.get('/viewResults',(req,res)=>{
             //prevents returning on back button press
             res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.render('layouts/viewResults',{ list: l })
+        }).catch((err)=>{
+            res.redirect('/adminlogin')
         })
         }
         else{
@@ -45,6 +47,7 @@ router.get('/fetchCollegeResults/:cid',(req,res)=>{
                 is_active:"active"
             }
         }).then(function(myDrive){
+            if(myDrive){
             user_test.findAll({
                 attributes:['uname','emailid','score'],
                 where:{
@@ -56,7 +59,13 @@ router.get('/fetchCollegeResults/:cid',(req,res)=>{
             }).then(function (userscores){
                 res.send(userscores);
             })
-            
+            .catch((err)=>{
+                res.redirect('/viewResults')
+            })
+        }
+        else{
+            res.redirect('/viewResults')
+        }
         })
         
     }

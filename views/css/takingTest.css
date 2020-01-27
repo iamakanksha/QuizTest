@@ -50,6 +50,8 @@ body{
     float: right;
     margin-right: 2%;
     color: white;
+    font-weight: bold;
+    font-size:26px;
 }
 #button_next{
     margin-left: 2%;
@@ -96,6 +98,8 @@ body{
     margin-top: 25px;
 }
 #logo{
-    margin-left: 2%;
     color: white;
+    font-weight: bold;
+    font-size:26px;
+  margin-left:25px;
 }

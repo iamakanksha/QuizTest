@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/cssFiles/first.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   
+    <title>START TEST</title>
         <script>
             var _tid=null
             function ajaxCallToServer() {
@@ -18,6 +27,12 @@
     
     </head>
     <body>
+        <header> 
+            <div class="navbar1">
+            <h3>PRACTEST</h3>	
+            </div>
+        </header>
+        <div style="padding:30px;">
         <h1>Kindly read the instructions given below before starting the test</h1>
         <p>
             <h3>Before starting the exam:</h3>
@@ -42,9 +57,10 @@
             * Have your Proctor enter the Username and Password provided in the email from The College and click enter.<br>
         </p>
         <form method="GET" action="/takingTest/<%=uid%>/<%=tid%>" >
-            <button type="submit" >
-                <h1>Start Exam</h1>
+            <button type="submit" class="btn btn-primary" >
+                <h4>Start Exam</h4>
             </button>
         </form>
+        </div>
     </body>
 </html>
