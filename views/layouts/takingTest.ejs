@@ -6,6 +6,27 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/cssFiles/takingTest.css">
     <script>
+      var f_time
+      const sec=1000
+      const min=60
+      function start_timer(final_time) {
+        f_time=final_time
+        setInterval(clock,1000);
+      }
+      
+      function clock(){
+        var current_time=new Date().getTime();
+        var time_left=f_time-current_time
+        time_left=Math.floor(time_left/sec)
+        time_left_min=Math.floor(time_left/min)
+        time_left_sec=time_left%min
+        var time_display=time_left_min+":"+time_left_sec
+        document.getElementById('clock').innerHTML=time_display
+        
+        if(time_display.localeCompare("0:0")==0){
+          document.getElementById("timeup").click()
+        }
+      }
       function ajaxCallToServer(qid,tid,uid,answer_marked) {
         var xmlhttp = new XMLHttpRequest(); 
         var url = "/submitAnswer/"+qid+"/"+tid+"/"+answer_marked
@@ -90,11 +111,14 @@
       }
       window.onload=function(){
         document.getElementById("button_next").click();
+        document.getElementById("time_clock").click();
       };
       </script>
 </head>
 ​ <body>
-  
+  <div id='clock'>
+  </div>
+  <input type="button" id="time_clock" style="display: none;" onclick="start_timer('<%=endTime%>')">
   <div class='question-box'>
     <form method="GET" action="/submitAnswer" id="ques">
       
@@ -104,7 +128,7 @@
   <input type="button" id="button_next" value='Next' style="display: none;" onclick="ajaxCallforQ('<%=JSON.stringify(qid_json)%>')">
   <input type='button' id="button_prev" value='Previous' style="display: none;" onclick="prevQ('<%=JSON.stringify(qid_json)%>')">
   <button>
-    <a href="/endTest/<%=tid%>">End Test</a>
+    <a id="timeup" href="/endTest/<%=tid%>">End Test</a>
   </button>
 </body>
 </html>

@@ -18,17 +18,21 @@ router.get('/submitAnswer/:qid/:tid/:answer_marked' ,function (req, res) {
       }
     }).then(function(answer){
       var is_really_correct;
-      if(answer.correct_option==req.params.answer_marked)
-      is_really_correct=true;
-      else
-      is_really_correct=false;
-      
+      if(answer.correct_option==req.params.answer_marked){
+        is_really_correct=true;
+      }
+      else{
+        is_really_correct=false;
+      }
       user_question.update({answer_marked:req.params.answer_marked,is_correct:is_really_correct}, {
         where: {
           qid: req.params.qid,
           tid: req.params.tid,
           uid: req.session.user.uid
         }
+      })
+      .then(()=>{
+        res.sendStatus(200)
       })
     })
   }

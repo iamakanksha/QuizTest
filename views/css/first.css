@@ -4,11 +4,9 @@ body{
 }
 
 #top-logo{
-	height:50px;
-	width:150px;
-	padding-top: 10px;
+	height:70px;
+  width:120px;
 	padding-left: 20px;
-	padding-bottom:10px;
 }
 
 header, footer{
