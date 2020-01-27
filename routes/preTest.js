@@ -20,6 +20,7 @@ router.get('/preTest',(req,res)=>{
     if(req.session.user && req.cookies.user_sid){
 
         res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'); 
+        //find an active drive to be assigned to the user
         drive_test.findOne({
             attributes:['tid'],
             where:{
@@ -34,6 +35,7 @@ router.get('/preTest',(req,res)=>{
                     uid:req.session.user.uid
                 }
             }).then((userscore)=>{
+                //checking if user has already given the test
                 if(!userscore||userscore.score==null){
                     res.render("layouts/preTest",{userName:req.session.user.emailid,cid:req.session.user.cid,tid:theDrive.tid,uid:req.session.user.uid})
                 }
@@ -59,6 +61,7 @@ router.get('/preTest',(req,res)=>{
         res.redirect('/studentLogin')
     }
 })
+//fetching questions for the user
 router.get('/getFetchPopulate',(req,res)=>{
     if(req.session.user && req.cookies.user_sid){
         drive_test.findOne({

@@ -8,6 +8,7 @@ var path = require('path')
 var morgan=require('morgan')
 const alert=require('alert-node')
 
+const port=process.env.PORT||3000
 app.use(cookieParser());
 app.use(session({
     key:'user_sid',
@@ -76,4 +77,4 @@ app.use(endtest)
 const viewresults=require("./routes/viewResults")
 app.use(viewresults)
 
-app.listen(3000, () => console.log(`server started`))
+app.listen(port, () => console.log(`server started`))
