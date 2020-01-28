@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "aa",
+    "password": "bb",
+    "database": "xxx",
+    "host": "remotemysql.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "add",
+    "password": "add",
+    "database": "add",
+    "host": "remotemysql.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "add",
+    "password": "add",
+    "database": "add",
+    "host": "remotemysql.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
